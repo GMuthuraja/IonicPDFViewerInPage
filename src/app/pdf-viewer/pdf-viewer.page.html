@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      PDF Viewer
+    </ion-title>
+    <ion-buttons *ngIf="!erroText" slot="end">
+      <ion-button (click)="getPermission()">
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngIf="erroText" lines="none">{{erroText}}</ion-item>
+  <pdf-viewer *ngIf="!erroText" [src]="pdfSrc" [fit-to-page]="true" (error)="onError($event)"></pdf-viewer>
+</ion-content>

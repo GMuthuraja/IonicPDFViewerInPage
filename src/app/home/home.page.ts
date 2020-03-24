@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,43 +13,18 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 export class HomePage {
 
   pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-  erroText: any;
 
-  constructor(
-    private transfer: FileTransfer,
-    private file: File,
-    private androidPermissions: AndroidPermissions) { }
+  constructor(private router: Router) { }
 
   onSubmit() {
-    this.erroText = '';
-  }
-
-  onError(error) {
-    this.erroText = error;
-  }
-
-  getPermission() {
-    this.androidPermissions.hasPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
-      .then(status => {
-        if (status.hasPermission) {
-          this.savePDF();
-        } else {
-          this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
-            .then(status => {
-              if (status.hasPermission) {
-                this.savePDF();
-              }
-            });
+    if (this.pdfSrc) {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          url: this.pdfSrc
         }
-      });
-  }
+      };
 
-  savePDF() {
-    const fileTransfer: FileTransferObject = this.transfer.create();
-    fileTransfer.download(this.pdfSrc, this.file.externalRootDirectory + 'Download/' + 'pdfviewer_sample.pdf').then(result => {
-      alert("File Downloaded Successfully");
-    }).catch(error => {
-      console.log(error, 'Error while downloading the file');
-    });
+      this.router.navigate(['pdf-viewer'], navigationExtras);
+    }
   }
 }

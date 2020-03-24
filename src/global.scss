@@ -24,3 +24,30 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.mrgnRt5per{
+    margin-right:5% !important;
+}
+
+ion-input{
+    min-height: 45px !important;
+    font-size: 16px !important;
+    border: 1px solid var(--ion-color-medium) !important;
+    border-radius: 5px !important;
+}
+
+ion-card{
+    min-height: 220px !important;
+    padding: 5px !important;
+    margin-top: 40% !important;
+}
+
+.native-input.sc-ion-input-md{
+    padding: 5px !important;
+}
+
+ion-button{
+    min-height: 45px !important;
+}
+
