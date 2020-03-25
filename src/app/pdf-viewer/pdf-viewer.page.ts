@@ -3,6 +3,7 @@ import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ng
 import { File } from '@ionic-native/file/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -19,6 +20,7 @@ export class PdfViewerPage implements OnInit {
     private transfer: FileTransfer,
     private file: File,
     private router: Router,
+    private platform: Platform,
     private androidPermissions: AndroidPermissions) { }
 
   ngOnInit() {
@@ -31,7 +33,15 @@ export class PdfViewerPage implements OnInit {
     this.erroText = error;
   }
 
-  getPermission() {
+  viewPDF() {
+    if (this.platform.is('android')) {
+      this.checkPermission();
+    } else {
+      this.savePDF();
+    }
+  }
+
+  checkPermission() {
     this.androidPermissions.hasPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
       .then(status => {
         if (status.hasPermission) {
