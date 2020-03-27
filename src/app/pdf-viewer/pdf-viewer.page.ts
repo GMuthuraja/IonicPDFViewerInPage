@@ -59,11 +59,11 @@ export class PdfViewerPage implements OnInit {
 
   savePDF() {
     const fileTransfer: FileTransferObject = this.transfer.create();
-    fileTransfer.download(this.pdfSrc, this.file.externalRootDirectory + 'Download/' + 'pdfviewer_sample.pdf').then(result => {
+    let path = (this.file.externalRootDirectory || this.file.dataDirectory);
+    fileTransfer.download(this.pdfSrc, path + 'Download/' + 'pdfviewer_sample.pdf').then(result => {
       alert("File Downloaded Successfully");
     }).catch(error => {
       console.log(error, 'Error while downloading the file');
     });
   }
-
 }

@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
